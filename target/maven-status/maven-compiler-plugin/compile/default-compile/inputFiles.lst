@@ -1,6 +1,6 @@
-E:\projectweek\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\controller\HomeController.java
-E:\projectweek\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\ProductApplication.java
-E:\projectweek\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\service\ProductService.java
-E:\projectweek\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\db\ProductRepository.java
-E:\projectweek\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\domain\Product.java
-E:\projectweek\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\controller\ProductRestController.java
+/home/jerome/hybrid-cloud-numberone-web/src/main/java/com/numberone/webshop/controller/ProductRestController.java
+/home/jerome/hybrid-cloud-numberone-web/src/main/java/com/numberone/webshop/db/ProductRepository.java
+/home/jerome/hybrid-cloud-numberone-web/src/main/java/com/numberone/webshop/service/ProductService.java
+/home/jerome/hybrid-cloud-numberone-web/src/main/java/com/numberone/webshop/ProductApplication.java
+/home/jerome/hybrid-cloud-numberone-web/src/main/java/com/numberone/webshop/domain/Product.java
+/home/jerome/hybrid-cloud-numberone-web/src/main/java/com/numberone/webshop/controller/HomeController.java
