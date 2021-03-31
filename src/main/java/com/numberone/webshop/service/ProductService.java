@@ -2,10 +2,12 @@ package com.numberone.webshop.service;
 
 import com.numberone.webshop.db.ProductRepository;
 import com.numberone.webshop.domain.Product;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -17,6 +19,29 @@ public class ProductService {
     public Iterable<Product> getAllProducts(){
         return productRepository.findAll();
     }
+    public Product getProduct(Long id){
+        return productRepository.findProductById(id);
+    };
+
+    public void save(Product product) {
+        if (product == null){
+            throw new ServiceException("Product is empty");
+        }
+        productRepository.save(product);
+    }
+
+    public Optional<Product> findByIdTeam(long id) {
+        return productRepository.findById(id);
+    }
+
+    public void deleteProduct(long id) {
+        Product product = null;
+        product = this.getProduct(id);
+        if (product != null){
+            productRepository.delete(product);
+        }
+    }
+
     /*
     @PostConstruct
     public void init(){
