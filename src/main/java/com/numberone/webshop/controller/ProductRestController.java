@@ -5,8 +5,10 @@ import com.numberone.webshop.domain.Product;
 import com.numberone.webshop.service.ProductService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -47,9 +49,11 @@ public class ProductRestController {
     public void addProduct(@Valid Product product, Model model){
         productService.save(product);
     }
-    @PostMapping("/deleteProduct/{id}")
-    public void deleteProduct(@PathVariable("id") long id) throws Exception{
-        Product product = productService.findByIdTeam(id).orElseThrow(() -> new IllegalArgumentException("ERROR"));
+    @DeleteMapping("/deleteProduct/{id}")
+    public void deleteProduct(@PathVariable("id") long id, Model model) throws Exception{
+        model.addAttribute("test", "testAtt");
+        Product product = productService.findByIdTeam(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id"));
         productService.deleteProduct(id);
+
     }
 }
