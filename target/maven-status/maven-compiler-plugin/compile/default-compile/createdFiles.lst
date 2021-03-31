@@ -1,6 +1,6 @@
-com\numberone\webshop\controller\HomeController.class
-com\numberone\webshop\domain\Product.class
-com\numberone\webshop\db\ProductRepository.class
-com\numberone\webshop\controller\ProductRestController.class
-com\numberone\webshop\ProductApplication.class
-com\numberone\webshop\service\ProductService.class
+com/numberone/webshop/domain/Product.class
+com/numberone/webshop/ProductApplication.class
+com/numberone/webshop/controller/HomeController.class
+com/numberone/webshop/service/ProductService.class
+com/numberone/webshop/controller/ProductRestController.class
+com/numberone/webshop/db/ProductRepository.class
