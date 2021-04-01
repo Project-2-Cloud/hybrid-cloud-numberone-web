@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -56,5 +58,40 @@ public class ProductRestController {
         Product product = productService.findByIdTeam(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id"));
         productService.deleteProduct(id);
 
+    }
+    @PostMapping("/buyProduct/{id}")
+    public void buyProduct(@PathVariable("id") long id, Model model){
+        Product product;
+        product = this.getProduct(id);
+        if (product != null){
+            product.setQuantity(product.getQuantity()-1);
+            productService.save(product);
+        }
+    }
+
+    // Stuur een POST request met json key "productsIds" met als value de id's van de gekochte producten gescheiden met ",".
+    // Voorbeeld: {"productIds": "1,2,3,4,5"}
+    @PostMapping("/buyProducts")
+    @ResponseBody
+    public void buyProducts(HttpServletRequest request, Model model){
+        String productIdsString = request.getParameter("productIds");
+        String[] strArray = productIdsString.split(",");
+        ArrayList<Long> productLongs = new ArrayList<Long>();
+        try{
+            for (String str : strArray){
+                productLongs.add(Long.valueOf(str));
+            }
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id");
+        }
+        for (Long id : productLongs){
+            Product product = null;
+            product = this.getProduct(id);
+            if (product != null){
+                product.setQuantity(product.getQuantity()-1);
+                productService.save(product);
+            }
+        }
     }
 }
