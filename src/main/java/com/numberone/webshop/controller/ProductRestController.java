@@ -1,5 +1,6 @@
 package com.numberone.webshop.controller;
 
+import com.google.gson.Gson;
 import com.numberone.webshop.db.ProductRepository;
 import com.numberone.webshop.domain.Product;
 import com.numberone.webshop.service.ProductService;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class ProductRestController {
     @Autowired
     private ProductService productService;
+
     /*
     @PostMapping("/addProduct")
     public Iterable<Product> addProduct(@Valid Product product){
@@ -28,7 +30,7 @@ public class ProductRestController {
     }
     */
     @GetMapping("/productsOverview")
-    public Iterable<Product> overview(Model model){
+    public Iterable<Product> overview(Model model) {
         return productService.getAllProducts();
     }
 
@@ -36,56 +38,44 @@ public class ProductRestController {
     public Product getProduct(@PathVariable("id") long id) {
         return productService.getProduct(id);
     }
+
     @PostMapping("/updateProduct/{id}")
-    public void updateProduct(@PathVariable("id") long id, @Valid Product product, Model model){
+    public void updateProduct(@PathVariable("id") long id, @Valid Product product, Model model) {
         System.out.println("test");
         Product foundProduct = null;
-        try{
+        try {
             foundProduct = productService.getProduct(id);
+        } catch (Exception e) {
         }
-        catch (Exception e){};
-        if (foundProduct != null){
+        ;
+        if (foundProduct != null) {
             productService.save(product);
         }
     }
+
     @PostMapping("/addProduct")
-    public void addProduct(@Valid Product product, Model model){
+    public void addProduct(@Valid Product product, Model model) {
         productService.save(product);
     }
+
     @DeleteMapping("/deleteProduct/{id}")
-    public void deleteProduct(@PathVariable("id") long id, Model model) throws Exception{
+    public void deleteProduct(@PathVariable("id") long id, Model model) throws Exception {
         model.addAttribute("test", "testAtt");
         Product product = productService.findByIdTeam(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id"));
         productService.deleteProduct(id);
 
     }
-    @PostMapping("/buyProduct/{id}")
-    public void buyProduct(@PathVariable("id") long id, Model model){
-        Product product;
-        product = this.getProduct(id);
-        if (product != null){
-            product.setQuantity(product.getQuantity()-1);
-            productService.save(product);
-        }
-    }
-
-    // Stuur een POST request met json key "productsIds" met als value de id's van de gekochte producten gescheiden met ",".
-    // Voorbeeld: {"productIds": "1,2,3,4,5"}
     @PostMapping("/buyProducts")
     @ResponseBody
-    public void buyProducts(HttpServletRequest request, Model model){
+    public void buyProducts(HttpServletRequest request, Model model) {
         String productIdsString = request.getParameter("productIds");
-        String[] strArray = productIdsString.split(",");
-        ArrayList<Long> productLongs = new ArrayList<Long>();
-        try{
-            for (String str : strArray){
-                productLongs.add(Long.valueOf(str));
-            }
+        System.out.println(productIdsString);
+        Gson gson = new Gson();
+        Long[] productsIdsLongs = gson.fromJson(productIdsString, Long[].class);
+        for (Long productId : productsIdsLongs) {
+            System.out.println(productId);
         }
-        catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id");
-        }
-        for (Long id : productLongs){
+        for (Long id : productsIdsLongs){
             Product product = null;
             product = this.getProduct(id);
             if (product != null){
