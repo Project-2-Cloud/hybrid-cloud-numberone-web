@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 
-@RestController
+
 //@CrossOrigin(origins = "*")
 @CrossOrigin( origins = "http://localhost:8080", allowCredentials = "true")
-@RequestMapping("/api/product")
+@RestController
 public class ProductRestController {
     @Autowired
     private ProductService productService;
@@ -33,9 +33,24 @@ public class ProductRestController {
         return productService.getAllProducts();
     }
     */
-    @GetMapping("/productsOverview")
+    @GetMapping("/products")
     public Iterable<Product> overview(Model model) {
         return productService.getAllProducts();
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/products")
+    public String addProduct(@RequestBody Product product, @AuthenticationPrincipal Jwt accessToken) {
+        System.out.println("In POST Request");
+        String scope = accessToken.getClaims().get("scope").toString();
+        Boolean partnerRole = scope.contains("partner");
+
+        if (partnerRole) {
+            System.out.println("Contains sequence 'partner': " + accessToken.getClaims().get("scope").toString());
+            System.out.println("Contains sequence 'partner': " + accessToken.getClaims().get("scope").toString().contains("partner"));
+            return "Product added";
+        } else {
+            return "Not Authorized to add product";
+        }
     }
 
     @GetMapping("/showProduct/{id}")

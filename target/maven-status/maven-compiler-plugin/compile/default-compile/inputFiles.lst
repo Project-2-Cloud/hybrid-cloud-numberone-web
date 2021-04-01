@@ -1,6 +1,8 @@
-C:\Users\Arno\OneDrive\School\Web4\webshop\src\main\java\com\numberone\webshop\controller\HomeController.java
-C:\Users\Arno\OneDrive\School\Web4\webshop\src\main\java\com\numberone\webshop\controller\ProductRestController.java
-C:\Users\Arno\OneDrive\School\Web4\webshop\src\main\java\com\numberone\webshop\service\ProductService.java
-C:\Users\Arno\OneDrive\School\Web4\webshop\src\main\java\com\numberone\webshop\db\ProductRepository.java
-C:\Users\Arno\OneDrive\School\Web4\webshop\src\main\java\com\numberone\webshop\domain\Product.java
-C:\Users\Arno\OneDrive\School\Web4\webshop\src\main\java\com\numberone\webshop\ProductApplication.java
+C:\Users\Jerome\UCLL\2020-2021_Sem2\Project-2\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\domain\Product.java
+C:\Users\Jerome\UCLL\2020-2021_Sem2\Project-2\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\util\ScopeValidator.java
+C:\Users\Jerome\UCLL\2020-2021_Sem2\Project-2\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\controller\ProductRestController.java
+C:\Users\Jerome\UCLL\2020-2021_Sem2\Project-2\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\db\ProductRepository.java
+C:\Users\Jerome\UCLL\2020-2021_Sem2\Project-2\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\service\ProductService.java
+C:\Users\Jerome\UCLL\2020-2021_Sem2\Project-2\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\util\WebSecurityConfiguration.java
+C:\Users\Jerome\UCLL\2020-2021_Sem2\Project-2\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\ProductApplication.java
+C:\Users\Jerome\UCLL\2020-2021_Sem2\Project-2\hybrid-cloud-numberone-web\src\main\java\com\numberone\webshop\controller\HomeController.java
