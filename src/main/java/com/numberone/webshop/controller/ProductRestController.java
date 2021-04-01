@@ -84,7 +84,7 @@ public class ProductRestController {
     }
     @PostMapping("/buyProducts")
     @ResponseBody
-    public void buyProducts(HttpServletRequest request, Model model) {
+    public void buyProducts(HttpServletRequest request, Model model, @AuthenticationPrincipal Jwt accessToken) {
         String productIdsString = request.getParameter("productIds");
         System.out.println(productIdsString);
         Gson gson = new Gson();
