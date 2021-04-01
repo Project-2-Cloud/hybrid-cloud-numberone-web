@@ -64,11 +64,11 @@ public class Product {
         this.thumbnail_url = thumbnail_url;
     }
 
-    public int getQuanity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuanity(int quanity) {
+    public void setQuantity(int quanity) {
         this.quantity = quanity;
     }
 
