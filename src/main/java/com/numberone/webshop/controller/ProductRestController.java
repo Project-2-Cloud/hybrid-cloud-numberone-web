@@ -6,7 +6,10 @@ import com.numberone.webshop.domain.Product;
 import com.numberone.webshop.service.ProductService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,7 +19,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
+@CrossOrigin( origins = "http://localhost:8080", allowCredentials = "true")
 @RequestMapping("/api/product")
 public class ProductRestController {
     @Autowired
@@ -52,7 +56,20 @@ public class ProductRestController {
             productService.save(product);
         }
     }
-
+    @GetMapping("/check")
+    public boolean greeting(@RequestParam(value = "name", defaultValue = "World") String name,
+                            @AuthenticationPrincipal Jwt accessToken) {
+        System.out.println("In GET Request");
+        String scope = accessToken.getClaims().get("scope").toString();
+        Boolean partnerRole = scope.contains("partner");
+        System.out.println("Contains sequence 'partner': " + accessToken.getClaims().get("scope").toString());
+        System.out.println("Contains sequence 'partner': " + accessToken.getClaims().get("scope").toString().contains("partner"));
+        if (partnerRole) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     @PostMapping("/addProduct")
     public void addProduct(@Valid Product product, Model model) {
         productService.save(product);
